@@ -7,6 +7,7 @@ from app import rank_generator
 from app.date_filter import DateFilter
 from app.tag_info_crawler import TagInfoCrawler
 
+
 def save_to_file(filename: str, raw_data: list, ori: str, non_ori: str):
     dirpath = f'./data/{filename}'
     if not os.path.exists(dirpath):

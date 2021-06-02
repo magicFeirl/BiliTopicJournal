@@ -52,7 +52,7 @@ def main():
         month = month - 1
 
     # 获取指定 tags 的上个月的视频更新信息
-    r = crawler.fetch_many(tags, 1, 1, date_filter=df.month, args=(year, month))
+    r = crawler.fetch_many(tags, 1, 51, date_filter=df.month, args=(year, month))
 
     # 原创 & 搬运 结果文本
     ori, non_ori = rank_generator.generate(r)

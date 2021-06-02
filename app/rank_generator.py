@@ -22,9 +22,11 @@ def generate(raw_data):
         danmaku = stat['danmaku']
         coin = stat['coin']
         share = stat['share']
-        # reply = stat['reply']
+        reply = stat['reply']
 
-        score = view + like * 10 + (danmaku + coin) * 20 + favorite * 30 + share * 50
+        # 分数计算公式:
+        # 播放量 + 回复数 * 3 + 点赞 * 10 + 弹幕 * 20 + 投币 * 20 + 收藏 * 30 + 分享 * 50
+        score = view + reply * 3 + like * 10 + (danmaku + coin) * 20 + favorite * 30 + share * 50
 
         """
         if view == 0:

@@ -30,7 +30,13 @@ class TagInfoCrawler():
             'tag_id': tid
         }
 
-        rj = self.request('GET', api, params=params).json()
+        try:
+            req = self.request('GET', api, params=params)
+            # print(req.content)
+            rj = req.json()
+        except Exception as e:
+            print(e)
+            print(req.content)
 
         if not rj['data']['news']['archives']:
             return None

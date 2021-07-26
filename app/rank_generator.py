@@ -56,15 +56,5 @@ def generate(raw_data):
     non_ori.sort(key=lambda x: x['score'], reverse=True)
     ori.sort(key=lambda x: x['score'], reverse=True)
 
-    return format_data(ori), format_data(non_ori)
-
-
-def format_data(rank_list):
-    result = []
-
-    for idx, item in enumerate(rank_list):
-        result.append(' '.join([str(idx), str(item['aid']), item['title'], str(item['score'])]))
-
-    return '\n'.join(result)
-
+    return ori, non_ori
 

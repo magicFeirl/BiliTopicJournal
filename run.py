@@ -8,6 +8,15 @@ from app.date_filter import DateFilter
 from app.tag_info_crawler import TagInfoCrawler
 
 
+def format_data(rank_list):
+    result = []
+
+    for idx, item in enumerate(rank_list):
+        result.append(' '.join([str(idx), str(item['aid']), item['title'], str(item['score'])]))
+
+    return '\n'.join(result)
+
+
 def save_to_file(filename: str, raw_data: list, ori: str, non_ori: str):
     dirpath = f'./data/{filename}'
     if not os.path.exists(dirpath):
@@ -53,13 +62,16 @@ def main():
         month = month - 1
 
     # 获取指定 tags 的上个月的视频更新信息
-    r = crawler.fetch_many(tags, 1, 51, date_filter=df.month, args=(year, month))
+    r = crawler.fetch_many(tags, 1, 2, date_filter=df.month, args=(year, month))
 
-    # 原创 & 搬运 结果文本
+    # 原创 & 搬运 结果列表
     ori, non_ori = rank_generator.generate(r)
 
+    # 原创 & 搬运 结果文本
+    ori_str, non_ori_str = format_data(ori), format_data(non_ori)
+
     # 结果输出到 ./data/{year}_{month}/ 下
-    save_to_file(f'{year}_{month}', r, ori, non_ori)
+    save_to_file(f'{year}_{month}', r, ori_str, non_ori_str)
 
 
 if __name__ == '__main__':
